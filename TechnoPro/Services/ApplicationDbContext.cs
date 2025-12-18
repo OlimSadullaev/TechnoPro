@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TechnoPro.Models;
 
 namespace TechnoPro.Services
 {
@@ -8,5 +9,7 @@ namespace TechnoPro.Services
             : base(options)
         {
         }
+
+        public DbSet<Product> Products { get; set; }
     }
 }
