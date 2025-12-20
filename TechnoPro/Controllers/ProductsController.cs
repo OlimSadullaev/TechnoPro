@@ -5,6 +5,7 @@ using TechnoPro.Services;
 
 namespace TechnoPro.Controllers
 {
+    [Route("/Admin/[controller]/{action=Index}/{id?}")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext context;
