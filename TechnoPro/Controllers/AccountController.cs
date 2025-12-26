@@ -25,7 +25,7 @@ namespace TechnoPro.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return View(registerDto);
             }
@@ -63,6 +63,21 @@ namespace TechnoPro.Controllers
             }
 
             return View(registerDto);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            if (signInManager.IsSignedIn(User))
+            {
+                signInManager.SignOutAsync().Wait();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Login()
+        {
+            return View();
         }
     }
 }
