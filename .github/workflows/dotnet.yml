@@ -19,10 +19,13 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore TechnoPro.sln
+        working-directory: MVC/Ecommerce/TechnoPro
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build TechnoPro.sln --no-restore --configuration Release
+        working-directory: MVC/Ecommerce/TechnoPro
+        run: dotnet build --no-restore --configuration Release
 
       - name: Test
-        run: dotnet test TechnoPro.sln --no-build --configuration Release --verbosity normal
+        working-directory: MVC/Ecommerce/TechnoPro
+        run: dotnet test --no-build --configuration Release --verbosity normal
