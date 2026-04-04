@@ -181,7 +181,7 @@
                                 </li>
                             </ul>
                         }
-                        else if (User.IsInRole("client"))
+                        else if (User.IsInRole("client")) // checking for client role is optional, you can also just show the client dropdown for all non-admin users
                         {
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
