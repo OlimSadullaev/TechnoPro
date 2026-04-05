@@ -41,6 +41,8 @@ namespace TechnoPro.Controllers
             var orders = query.ToList();
 
             ViewBag.Orders = orders;
+            ViewBag.PageIndex = pageIndex;
+            ViewBag.TotalPages = totalPages;
 
             return View();
         }
