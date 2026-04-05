@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TechnoPro.Models;
 using TechnoPro.Services;
 
 namespace TechnoPro.Controllers
@@ -17,9 +19,26 @@ namespace TechnoPro.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Index(int pageIndex)
         {
-            var orders = context.Orders.OrderByDescending(o => o.Id).ToList();
+            IQueryable<Order> query = context.Orders
+                .Include(o => o.Client)
+                .Include(o => o.Items)
+                .ThenInclude(oi => oi.Product);
+
+            if(pageIndex <= 0)
+            {
+                pageIndex = 1;
+            }
+
+            decimal count = query.Count();
+            int totalPages = (int)Math.Ceiling(count / PageSize);
+
+            query = query
+                .Skip((pageIndex - 1) * PageSize)
+                .Take(PageSize);
+
+            var orders = query.ToList();
 
             ViewBag.Orders = orders;
 
