@@ -1,4 +1,3 @@
-using brevo_csharp.Client;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TechnoPro.Models;
@@ -22,9 +21,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
-
-Configuration.Default.ApiKey.Clear();
-Configuration.Default.ApiKey.Add("api-key", builder.Configuration["BrevoSettings:ApiKey"]);
 
 var app = builder.Build();
 
@@ -50,11 +46,12 @@ app.MapControllerRoute(
 // create the roles and the first admin user if not available yet
 using (var scope = app.Services.CreateScope())
 {
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
     var userManager = scope.ServiceProvider.GetService(typeof(UserManager<ApplicationUser>))
         as UserManager<ApplicationUser>;
     var roleManager = scope.ServiceProvider.GetService(typeof(RoleManager<IdentityRole>))
         as RoleManager<IdentityRole>;
-
     await DatabaseInitializer.SeedDataAsync(userManager, roleManager);
 }
 
