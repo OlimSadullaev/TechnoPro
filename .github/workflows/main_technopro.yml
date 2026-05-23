@@ -22,7 +22,7 @@ jobs:
         working-directory: ./TechnoPro
 
       - name: dotnet publish
-        run: dotnet publish -c Release -r win-x64 --self-contained true -o ./publish
+        run: dotnet publish -c Release -o ./publish
         working-directory: ./TechnoPro
 
       - name: Upload artifact for deployment job
