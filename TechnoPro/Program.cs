@@ -4,6 +4,7 @@ using TechnoPro.Models;
 using TechnoPro.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddConsole();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
