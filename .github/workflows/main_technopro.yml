@@ -52,6 +52,6 @@ jobs:
       - name: Deploy to Azure
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ env.TechnoPro }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_46BBB59D0F59400D889A877F375F3980 }}
           package: .
